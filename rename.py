@@ -1,9 +1,7 @@
 import os
+from os import rename
 
-""" 
-Usage:
-python rename.py
-"""
+"""Usage: python rename.py"""
 
 def echo():
     line_signal = "-----------------"
@@ -11,6 +9,7 @@ def echo():
 
 def open_directory():
     global path
+    # path = os.getcwd()
     path = input(" Please provide target directory: ")
     return path
 
@@ -46,6 +45,7 @@ def renaming_pointfiles_withtif():
             total_count = len(filenames)
             print(" TOTAL FILES FOUND IN FOLDER: %s" % total_count)
             echo()
+            # word_to_change = ".tif"
             word_to_change = input(" a.) Provide the sub-text you want to find and replace, (ex: '.tif'): \n FIND: ")
             echo()
 
@@ -58,27 +58,32 @@ def renaming_pointfiles_withtif():
             if to_process:
                 print("[%s out of %s] FOUND FILES CONTAINING '%s' :" % (len(to_process), total_count, word_to_change))
                 echo()
+                # word_to_replace = ""
                 word_to_replace = input(" b.) Exact characters you would like it to become into: (ex: '.p1.tif.pointz' or BLANK SPACE), \n RENAME INTO: ")
                 echo()
-                for file in to_process:
+                for file in filenames:
                     print(file)
-                    os.rename(file, file.replace(word_to_change, word_to_replace))
+                    new_name = file.replace(word_to_change, word_to_replace)
+                    if file != new_name:
+                        path_old_file = path + "/" + file
+                        path_new_file = path + "/" + new_name
+                        rename(path_old_file, path_new_file)
                 echo()
                 list_pointfiles_in_folder()
             else:
                 print(" NO FILES FOUND CONTAINING THE EXACT SUB-TEXT '%s'" % word_to_change)
                 echo()
                 print(" RENAMING FAILED")
+                echo()
 
     except FileNotFoundError:
-        echo()
         print(" OOPS SORRY, An invalid file path was given. Kindly check the path again.")
         echo()
         print(" NO FILES WERE PROCESSED")
         echo()
         print(" RENAMING FAILED")
     except OSError:
-        print(" The filenae, directory name, or volume label syntax is incorrect.")
+        print(" The filename, directory name, or volume label syntax is incorrect.")
     except:
         raise
 
