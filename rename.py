@@ -54,13 +54,11 @@ def renaming_pointfiles_withtif():
             for filename in filenames:
                 if word_to_change in filename:
                     to_process.append(filename)
-            print(" NO FILES FOUND CONTAINING THE EXACT SUB-TEXT")
-            echo()
 
             if to_process:
                 print("[%s out of %s] FOUND FILES CONTAINING '%s' :" % (len(to_process), total_count, word_to_change))
                 echo()
-                word_to_replace = input(" b.) Exact characters you would like it to become into: (ex: '.p1.tif.pointz'), \n RENAME INTO: ")
+                word_to_replace = input(" b.) Exact characters you would like it to become into: (ex: '.p1.tif.pointz' or BLANK SPACE), \n RENAME INTO: ")
                 echo()
                 for file in to_process:
                     print(file)
@@ -68,6 +66,8 @@ def renaming_pointfiles_withtif():
                 echo()
                 list_pointfiles_in_folder()
             else:
+                print(" NO FILES FOUND CONTAINING THE EXACT SUB-TEXT '%s'" % word_to_change)
+                echo()
                 print(" RENAMING FAILED")
 
     except FileNotFoundError:
