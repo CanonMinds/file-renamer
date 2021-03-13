@@ -9,7 +9,6 @@ def echo():
 
 def open_directory():
     global path
-    # path = os.getcwd()
     path = input(" Please provide target directory: ")
     return path
 
@@ -45,7 +44,6 @@ def renaming_pointfiles_withtif():
             total_count = len(filenames)
             print(" TOTAL FILES FOUND IN FOLDER: %s" % total_count)
             echo()
-            # word_to_change = ".tif"
             word_to_change = input(" a.) Provide the sub-text you want to find and replace, (ex: '.tif'): \n FIND: ")
             echo()
 
@@ -58,7 +56,6 @@ def renaming_pointfiles_withtif():
             if to_process:
                 print("[%s out of %s] FOUND FILES CONTAINING '%s' :" % (len(to_process), total_count, word_to_change))
                 echo()
-                # word_to_replace = ""
                 word_to_replace = input(" b.) Exact characters you would like it to become into: (ex: '.p1.tif.pointz' or BLANK SPACE), \n RENAME INTO: ")
                 echo()
                 for file in filenames:
